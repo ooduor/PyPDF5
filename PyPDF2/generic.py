@@ -158,9 +158,9 @@ class ArrayObject(list, PdfObject):
             if isinstance(value, PdfObject):
                 subHash = value.hashValue()
                 if subHash is not None:
-                    md5Hash.update(subHash)
+                    md5Hash.update(subHash.encode('utf-8'))
             else:
-                md5Hash.update(value)
+                md5Hash.update(value.encode('utf-8'))
 
         return "ArrayObject:" + md5Hash.hexdigest()
 
@@ -584,19 +584,19 @@ class DictionaryObject(dict, PdfObject):
             stream.write(b_(" "))
             value.writeToStream(stream, encryption_key)
             stream.write(b_("\n"))
-        stream.write(b_(">>"))
+        stream.write(b_(">>")) 
 
     def hashValue(self):
         md5Hash = md5()
 
         for key, value in self.items():
-            md5Hash.update(key)
+            md5Hash.update(key.encode('utf-8'))
             if isinstance(value, PdfObject):
                 subHash = value.hashValue()
                 if subHash is not None:
-                    md5Hash.update(subHash)
+                    md5Hash.update(subHash.encode('utf-8'))
             else:
-                md5Hash.update(value)
+                md5Hash.update(value.encode('utf-8'))
 
         return "DictionaryObject:" + md5Hash.hexdigest()
 
