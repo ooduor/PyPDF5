@@ -2386,7 +2386,7 @@ def parseCMap(cstr):
     for entry in cstr.split("\n"):
         rr = re.match("\\s*<([0-9a-fA-F]+)>\\s+<([0-9a-fA-F]+)>\\s*", entry)
         if rr == None: continue
-        result[int(rr.group(1), base=16)] = unichr(int(rr.group(2), base=16))
+        result[int(rr.group(1), base=16)] = chr(int(rr.group(2), base=16))
     return result
 
 
